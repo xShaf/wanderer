@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'GenshinImpactFont';
+    src: url('../fonts/zh-cn.ttf') format('truetype');
+}
+
+body {
+    font-family: 'GenshinImpactFont', 'Noto Sans JP', sans-serif;
+    background-image: url('../images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.chat-box {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#custom-message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    text-align: center;
+}
+
+.quiz-choice-box {
+    background-color: rgba(45, 64, 89, 0.7);
+    border: 2px solid #2d4059;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.quiz-choice-box:hover {
+    background-color: rgba(0, 191, 255, 0.4);
+    border-color: #00bfff;
+}
+
+.selected-answer-box {
+    background-color: #ffc107 !important;
+    border-color: #e0a800 !important;
+    color: #212529 !important;
+}
+
+.quiz-choices-disabled .quiz-choice-box {
+    pointer-events: none;
+    cursor: default;
+}
+
+.container {
+    flex: 1;
+}
+
+.footer {
+    margin-top: auto;
+}

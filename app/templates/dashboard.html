@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="banner-container shadow-lg bg-white text-center py-2 rounded-3 mb-4 border border-light">
+    <img src="{{ url_for('static', filename='images/Paimon 3.png') }}" width="10%" alt="Paimon Logo">
+    <img src="{{ url_for('static', filename='genshin_banner.png') }}" class="img-fluid" width="30%"
+        alt="Genshin Banner">
+    <p class="m-4" style="color: black;">
+        Welcome, Traveler <strong>{{ user.username }}</strong>! <br>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-sm btn-outline-danger ms-2">Logout</a>
+        {% if user.is_admin %}
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-sm btn-outline-dark ms-2">Admin Panel</a>
+        {% endif %}
+    </p>
+</div>
+
+<div class="row g-4">
+    <!-- Left Column: Tabs for Chat & History -->
+    <div class="col-lg-8">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active bg-dark text-light border border-info me-2" id="pills-chat-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-chat" type="button" role="tab">Chat</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link bg-dark text-light border border-info" id="pills-history-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-history" type="button" role="tab"
+                    onclick="loadQuizHistory()">Quiz History</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <!-- Chat Tab -->
+            <div class="tab-pane fade show active" id="pills-chat" role="tabpanel">
+                <div class="module-container bg-dark rounded-3 shadow-lg p-4 d-flex flex-column border border-light">
+                    <h2 class="text-info text-center">🌌 Wanderer Bot Storyteller</h2>
+                    <div class="chat-box border border-info rounded-2 p-3 overflow-y-scroll bg-white mb-4 d-flex flex-column"
+                        id="chat-box" style="height: 400px;">
+                        <!-- Chat History -->
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="user-input" class="form-control bg-white text-dark border border-light"
+                            placeholder="Ask about Teyvat..." onkeydown="checkEnter(event)">
+                        <button class="btn btn-info text-dark fw-bold" id="send-button" onclick="sendMessage()">Send
+                            ✨</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="tab-pane fade" id="pills-history" role="tabpanel">
+                <div class="module-container bg-dark rounded-3 shadow-lg p-4 border border-light"
+                    style="max-height: 500px; overflow-y: auto;">
+                    <h3 class="text-warning text-center mb-4">📜 Past Challenges</h3>
+                    <ul class="list-group" id="quiz-history-list">
+                        <!-- History Items Loaded via JS -->
+                        <li class="list-group-item bg-dark text-white">Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Stats & Active Quiz -->
+    <div class="col-lg-4">
+        <!-- Stats -->
+        <div class="module-container bg-dark rounded-3 shadow-lg p-3 mb-4 border border-light text-center">
+            <h4 class="text-white">Adventure Status</h4>
+            <p class="text-warning fs-4 mb-1">EXP: <span id="user-points">{{ user.points }}</span></p>
+            <p class="text-info fs-5"><i class="fas fa-trophy text-warning"></i> Trophies: <span id="user-trophies">{{
+                    user.correct_quizzes }}</span></p>
+        </div>
+
+        <!-- Quiz Generator -->
+        <div class="module-container bg-dark rounded-3 shadow-lg p-4 h-100 d-flex flex-column border border-light">
+            <h3 class="text-warning text-center">Test Your Knowledge 🔥</h3>
+            <input type="text" id="quiz-topic" class="form-control mb-3 bg-white text-black border border-white"
+                placeholder="Enter a topic">
+            <div class="d-grid">
+                <button class="btn btn-warning mb-3" onclick="generateQuiz()">Generate Question</button>
+            </div>
+
+            <div id="quiz-container" class="p-3 mb-3 border border-info rounded-2 bg-black bg-opacity-25"
+                style="display: none;">
+                <p id="quiz-question" class="text-light fw-bold mb-3"></p>
+                <div id="quiz-choices" class="d-grid gap-2">
+                    <!-- Buttons will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast text-bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto" id="toast-title">Notification</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toast-body">
+            Message...
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
