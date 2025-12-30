@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="banner-container shadow-lg bg-white text-center py-2 rounded-3 mb-4 border border-light">
-    <img src="{{ url_for('static', filename='images/Paimon 3.png') }}" width="10%" alt="Paimon Logo">
-    <img src="{{ url_for('static', filename='genshin_banner.png') }}" class="img-fluid" width="30%"
-        alt="Genshin Banner">
+<div class="banner-container shadow-lg bg-white text-center py-3 rounded-3 mb-4 border border-light">
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mb-2">
+        <img src="{{ url_for('static', filename='images/paimon_3.png') }}" class="img-fluid"
+            style="max-width: 60px; height: auto;" alt="Paimon Logo">
+        <img src="{{ url_for('static', filename='genshin_banner.png') }}" class="img-fluid"
+            style="max-width: 200px; height: auto;" alt="Genshin Banner">
+    </div>
     <p class="m-4" style="color: black;">
         Welcome, Traveler <strong>{{ user.username }}</strong>! <br>
         <a href="{{ url_for('auth.logout') }}" class="btn btn-sm btn-outline-danger ms-2">Logout</a>
