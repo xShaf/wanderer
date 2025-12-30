@@ -35,7 +35,7 @@ cd wanderer
 
 ### 2. Install Dependencies
 ```bash
-pip install flask flask-sqlalchemy flask-login flask-bcrypt psycopg2-binary pymongo python-dotenv google-genai
+pip install -r requirements.txt
 ```
 
 ### 3. Configure Environment Variables
