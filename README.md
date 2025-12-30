@@ -17,6 +17,12 @@ Wanderer Bot is a feature-rich, Genshin Impact-themed AI chat application built 
     *   Manage registered users (promote/delete).
 *   **Responsive Design**: Fully optimized for Desktop and Mobile devices using Bootstrap 5.
 
+## 📸 Screenshots
+
+![Wanderer Bot Dashboard](.github/screenshots/Screenshot%202025-12-30%20094925.png)
+![Interactive Quiz](.github/screenshots/Screenshot%202025-12-30%20094943.png)
+![Chat Interface](.github/screenshots/Screenshot%202025-12-30%20094953.png)
+
 ## 🛠️ Tech Stack
 
 *   **Backend**: Python, Flask (MVC Pattern)
